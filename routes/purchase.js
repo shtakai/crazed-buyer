@@ -3,7 +3,6 @@ const { sendDM } = require('../modules/slack')
 
 module.exports = app => {
   app.post('/purchase', async (req, res) => {
-    console.log(req.body)
     const { text, user_id } = req.body
     res.send(
       {
@@ -18,15 +17,16 @@ module.exports = app => {
       [
         {
           text: "Do you authorize request?",
+          callback_id: 'purchase_request',
           actions: [
             {
-              "name": "purchase_request",
+              "name": "auth_button",
               "text": "Yes I approve",
               "type": "button",
               "value": "approved"
             },
             {
-              "name": "purchase_request",
+              "name": "auth_button",
               "text": "No",
               "type": "button",
               "value": "declined"
