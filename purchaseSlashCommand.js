@@ -20,7 +20,26 @@ app.post('/purchase', async (req, res) => {
 
   sendDM(
     config.ceoId,
-    `Hi! *<@${user_id}>* would like to order *${text}*. Do you authorize this purchase request?`
+    `Hi! *<@${user_id}>* would like to order *${text}*. Do you authorize this purchase request?`,
+    [
+      {
+        text: "Do you authorize request?",
+        actions: [
+          {
+            "name": "purchase_request",
+            "text": "Yes I approve",
+            "type": "button",
+            "value": "approved"
+          },
+          {
+            "name": "purchase_request",
+            "text": "No",
+            "type": "button",
+            "value": "declined"
+          },
+        ],
+      },
+    ]
   )
 })
 
