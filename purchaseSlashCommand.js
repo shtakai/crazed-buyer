@@ -7,7 +7,9 @@ app.use(bodyParser.json())
 
 app.post('/purchase', async (req, res) => {
   console.log(req.body)
-  res.send('OK')
+  res.send(
+     {text: "Thank you for purchase request." },
+  )
 })
 
 const PORT = 9999
