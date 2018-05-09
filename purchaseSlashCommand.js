@@ -10,13 +10,18 @@ app.use(bodyParser.json())
 
 app.post('/purchase', async (req, res) => {
   console.log(req.body)
+  const { text, user_id } = req.body
   res.send(
-     {text: "Thank you for purchase request." },
+    {
+      text: `
+      Thank you for purchase request. *${text}*. We will message the boss now for authorization.`
+    },
   )
 
-  sendDM(config.ceoId, 'hey wornderful person. Please authorize our purchase :sushi')
-
-
+  sendDM(
+    config.ceoId,
+    `Hi! *<@${user_id}>* would like to order *${text}*. Do you authorize this purchase request?`
+  )
 })
 
 const PORT = 9999
