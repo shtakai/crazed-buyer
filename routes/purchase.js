@@ -1,5 +1,6 @@
 const config = require('../config')
 const { sendDM } = require('../modules/slack')
+const { savePurchaseRequest } = require('../modules/database')
 
 module.exports = app => {
   app.post('/purchase', async (req, res) => {
@@ -9,6 +10,11 @@ module.exports = app => {
         text: `
       Thank you for purchase request. *${text}*. We will message the boss now for authorization.`
       },
+    )
+
+    await savePurchaseRequest(
+      user_id,
+      text
     )
 
     sendDM(
